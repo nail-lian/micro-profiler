@@ -53,8 +53,8 @@ namespace micro_profiler
 			_pc_main(static_pointer_cast<piechart>(factory_.create_control("piechart"))),
 			_lv_parents(static_pointer_cast<listview>(factory_.create_control("listview"))),
 			_lv_children(static_pointer_cast<listview>(factory_.create_control("listview"))),
-			_pc_children(static_pointer_cast<piechart>(factory_.create_control("piechart"))),
-			_cb_threads(static_pointer_cast<combobox>(factory_.create_control("combobox")))
+			_pc_children(static_pointer_cast<piechart>(factory_.create_control("piechart")))/*,
+			_cb_threads(static_pointer_cast<combobox>(factory_.create_control("combobox")))*/
 	{
 		set_spacing(5);
 
@@ -67,7 +67,7 @@ namespace micro_profiler
 		_lv_children->set_columns_model(_cm_children);
 
 		set_model(*_lv_main, _pc_main.get(), _conn_sort_main, *_cm_main, _m_main);
-
+/*
 		_cb_threads->set_model(_m_main->get_threads());
 		_cb_threads->select(0u);
 		_connections.push_back(_cb_threads->selection_changed += [model] (wpl::combobox::model_t::index_type index) {
@@ -78,7 +78,7 @@ namespace micro_profiler
 			else
 				model->set_filter();
 		});
-
+*/
 		_connections.push_back(_lv_main->selection_changed
 			+= bind(&tables_ui::on_selection_change, this, _1, _2));
 		_connections.push_back(_lv_main->item_activate
@@ -106,7 +106,7 @@ namespace micro_profiler
 
 		add(panel[0] = factory_.create_control<stack>("vstack"), percents(60), true);
 			panel[0]->set_spacing(5);
-			panel[0]->add(_cb_threads, pixels(24), false, 4);
+//			panel[0]->add(_cb_threads, pixels(24), false, 4);
 			panel[0]->add(panel[1] = factory_.create_control<stack>("hstack"), percents(100), false);
 				panel[1]->set_spacing(5);
 				panel[1]->add(_pc_main, pixels(150), false);
